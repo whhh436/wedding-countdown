@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吴航 & 晏萍萍 | 婚礼倒计时</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff7f8, #fff0f2);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 装饰元素 */
+        .decor {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        .decor.circle {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #e63980;
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+        }
+        
+        .decor.leaf {
+            font-size: 28px;
+            color: #f6c;
+            transform: rotate(-25deg);
+            bottom: 10%;
+            right: 5%;
+        }
+        
+        .decor.heart1 {
+            font-size: 36px;
+            color: #ff6b94;
+            top: 18%;
+            right: 12%;
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        .decor.heart2 {
+            font-size: 26px;
+            color: #ff8ba7;
+            bottom: 20%;
+            left: 8%;
+            animation: float 3s infinite ease-in-out;
+        }
+        
+        /* 主要内容容器 */
+        .container {
+            z-index: 2;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 247, 248, 0.8));
+            padding: 40px 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(230, 57, 128, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            width: 90%;
+            max-width: 700px;
+        }
+        
+        /* 标题区 */
+        .header {
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .header h1 {
+            color: #d12973;
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .title-decor {
+            color: #ff6b94;
+            margin: 0 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: #e63980;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        
+        /* 倒计时区 */
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(230, 57, 128, 0.15);
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        
+        .countdown-box {
+            background: linear-gradient(145deg, #ff4d94, #ff2c7d);
+            color: white;
+            padding: 15px 5px;
+            border-radius: 12px;
+            width: 23%;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(214, 41, 119, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(214, 41, 119, 0.4);
+        }
+        
+        .countdown-value {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .countdown-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        /* 底部祝福语 */
+        .footer {
+            margin-top: 30px;
+            color: #d12973;
+            font-size: 1.4rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        .wedding-date {
+            font-weight: 700;
+            margin-top: 8px;
+            font-size: 1.6rem;
+            color: #ff2c7d;
+        }
+        
+        .footer i {
+            margin: 0 5px;
+            color: #ff2c7d;
+        }
+        
+        /* 动画效果 */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+                width: 95%;
+            }
+            
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .countdown-box {
+                min-height: 85px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+            
+            .countdown-label {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-box {
+                width: 48%;
+                margin-bottom: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 装饰元素 -->
+    <div class="decor circle"></div>
+    <div class="decor leaf"><i class="fas fa-leaf"></i></div>
+    <div class="decor heart1"><i class="fas fa-heart"></i></div>
+    <div class="decor heart2"><i class="fas fa-heart"></i></div>
+    
+    <!-- 主要内容区 -->
+    <div class="container">
+        <div class="header">
+            <h1>吴航<span class="title-decor">❤</span>晏萍萍</h1>
+            <div class="subtitle">婚礼倒计时</div>
+        </div>
+        
+        <div class="countdown-container">
+            <div class="countdown">
+                <div class="countdown-box">
+                    <div class="countdown-value" id="days">99</div>
+                    <div class="countdown-label">天</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="hours">23</div>
+                    <div class="countdown-label">小时</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="minutes">59</div>
+                    <div class="countdown-label">分钟</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="seconds">59</div>
+                    <div class="countdown-label">秒钟</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>最美的时刻，期待与您共同见证</p>
+            <div class="wedding-date">
+                <i class="fas fa-heart"></i> 
+                2025年10月18日 
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 设置婚礼日期为2025年10月18日
+        const weddingDate = new Date('2025-10-18T12:00:00');
+        
+        function updateCountdown() {
+            const now = new Date();
+            const diff = weddingDate - now;
+            
+            // 计算时间单位
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // 更新页面显示
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+            
+            // 100天特殊提示
+            if (days === 100) {
+                alert("🎉 今天是吴航 & 晏萍萍婚礼倒计时100天的特别日子！");
+            }
+        }
+        
+        // 初始加载时更新
+        updateCountdown();
+        
+        // 每秒更新一次
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
